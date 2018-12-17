@@ -1,34 +1,40 @@
 import React, { Component } from 'react'
 import { firebaseConnect } from 'react-redux-firebase';
 import PropTypes from 'prop-types'
-// import { connect } from 'react-redux'
-// import { compose } from 'redux'
+import { connect } from 'react-redux'
+import { compose } from 'redux'
+import { notifyUser } from '../../actions/notifyAction'
+import Alert from '../layout/alert'
 
 class Login extends Component {
     state = {
-        email:'',
-        password:'',
+        email: '',
+        password: '',
     }
-    onChange = (e)=>{
+    onChange = (e) => {
         this.setState({
-            [e.target.name]:e.target.value
+            [e.target.name]: e.target.value
         })
     }
-    onSubmit = (e)=>{
-        e.preventDefault() 
-        const {firebase} = this.props;
-        const {email,password} = this.state
-        console.log({email,password})
-        firebase.login({email,password})
-        .catch(err=>{alert('invalid username password')})
+    onSubmit = (e) => {
+        e.preventDefault()
+        const { firebase, notifyUser } = this.props;
+        const { email, password } = this.state
+        console.log({ email, password })
+        firebase.login({ email, password })
+            .catch(err => { notifyUser('invalid username password', 'error') })
     }
     render() {
+        const { message, messageType } = this.props.notify
         return (
             <div>
                 <div className='row'>
                     <div className='col-md-6 mx-auto'>
                         <div className='card'>
                             <div className='card-body'>
+                                {message ? (
+                                    <Alert message={message} messageType={messageType} />
+                                ) : null}
                                 <h1 className='text-center pb-4 pt-4'>
                                     <span className='text-primary'>
                                         <i className='fas fa-lock'></i>
@@ -37,22 +43,22 @@ class Login extends Component {
                                 </h1>
                                 <form onSubmit={this.onSubmit}>
                                     <div className='from-group'>
-                                       <label htmlFor='email'>Email</label>
-                                       <input type='text' 
-                                       className='form-control'
-                                       name='email' value={this.state.email}
-                                        onChange={this.onChange}
-                                        required/>
+                                        <label htmlFor='email'>Email</label>
+                                        <input type='text'
+                                            className='form-control'
+                                            name='email' value={this.state.email}
+                                            onChange={this.onChange}
+                                            required />
                                     </div>
                                     <div className='from-group'>
-                                       <label htmlFor='password'>Password</label>
-                                       <input type='password' 
-                                       className='form-control'
-                                       name='password' value={this.state.password}
-                                        onChange={this.onChange}
-                                        required/>
+                                        <label htmlFor='password'>Password</label>
+                                        <input type='password'
+                                            className='form-control'
+                                            name='password' value={this.state.password}
+                                            onChange={this.onChange}
+                                            required />
                                     </div>
-                                    <input type="submit" value="Login" className='btn btn-primary btn-block mt-4'/>
+                                    <input type="submit" value="Login" className='btn btn-primary btn-block mt-4' />
                                 </form>
                             </div>
 
@@ -65,7 +71,12 @@ class Login extends Component {
     }
 }
 Login.propTypes = {
-    firebase:PropTypes.object.isRequired,
+    firebase: PropTypes.object.isRequired,
 }
 
-export default firebaseConnect()(Login)
+export default compose(
+    firebaseConnect(),
+    connect((state, props) => ({
+        notify: state.notify
+    }), { notifyUser })
+)(Login)
