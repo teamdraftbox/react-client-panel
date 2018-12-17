@@ -13,35 +13,32 @@ import Spinner from '../layout/Spinner'
   
 
   render() {
-      const {clients} = this.props
-      if(clients){
+      const {users} = this.props
+      if(users){
      return(
-         <div className="row">
+         <div className="row mt-4">
             <div className="col-md-6">
             <h2>
-            <i className="fas fa-users"/>{' '}Clients
+            <i className="fas fa-users"/>{' '}Users
             </h2>
-            </div>
-            <div className="col-md-6">
-            <h2>$ 500.00</h2>
             </div>
             <table className="table table-striped">
                 <thead className="thead-inverse">
                     <tr>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>Balance</th>
+                        <th>Phone</th>
                         <th/>
                     </tr>
                 </thead>
                 <tbody>
-                    {clients.map(client=>(
-                        <tr key={client.id}>
-                            <td>{client.firstName} {client.lastName}</td>
-                            <td>{client.email}</td>
-                            <td>${(client.balance)}</td>
+                    {users.map(user=>(
+                        <tr key={user.id}>
+                            <td>{user.name}</td>
+                            <td>{user.email}</td>
+                            <td>{(user.phone)}</td>
                             <td>
-                                <Link to={`/client/${client.id}`} className='btn btn-secondary btn-sm'>
+                                <Link to={`/client/${user.id}`} className='btn btn-secondary btn-sm'>
                                        <i className="fas fa-arrow-circle-right"></i> Details 
                                 </Link>
                             </td>
@@ -58,11 +55,11 @@ import Spinner from '../layout/Spinner'
 }
 Clients.propTypes = {
     firestore:PropTypes.object.isRequired,
-    clients:PropTypes.array
+    users:PropTypes.array
 }
 export default compose(
-    firestoreConnect([{collection:'clients'}]),
+    firestoreConnect([{collection:'users'}]),
     connect((state,props)=>({
-        clients:state.firestore.ordered.clients  
+        users:state.firestore.ordered.users
     }))
 )(Clients)

@@ -6,12 +6,12 @@ import {reduxFirestore,firestoreReducer} from 'redux-firestore'
 import notifyReducer from './reducers/notifyReducer'
 //firebaeconfig
 const firebaseConfig = {
-    apiKey: "AIzaSyBbuqRJLkTQuNWsoqGeqxGJIPaZFNqPbfQ",
-    authDomain: "react-userpanel.firebaseapp.com",
-    databaseURL: "https://react-userpanel.firebaseio.com",
-    projectId: "react-userpanel",
-    storageBucket: "react-userpanel.appspot.com",
-    messagingSenderId: "568207877249"
+    apiKey: "AIzaSyDw7waIhZ_gnQheJHFyZB-VEv6kzFwec7U",
+    authDomain: "okvay-326fe.firebaseapp.com",
+    databaseURL: "https://okvay-326fe.firebaseio.com",
+    projectId: "okvay-326fe",
+    storageBucket: "okvay-326fe.appspot.com",
+    messagingSenderId: "465004313434"
 }
 
 // react-reduc-firebase configs

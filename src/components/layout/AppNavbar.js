@@ -30,7 +30,7 @@ class AppNavbar extends Component {
     const { auth } = this.props
     return (
       <div>
-        <nav className="navbar navbar-expand-md navbar-dark bg-primary mb-4">
+        <nav className="navbar navbar-expand-md navbar-dark bg-primary">
           <div className="container">
             <Link to="/" className="navbar-brand">Client Panel</Link>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
