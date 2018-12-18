@@ -38,7 +38,7 @@ import Spinner from '../layout/Spinner'
                             <td>{user.email}</td>
                             <td>{(user.phone)}</td>
                             <td>
-                                <Link to={`/client/${user.id}`} className='btn btn-secondary btn-sm'>
+                                <Link to={`/user/${user.id}`} className='btn btn-secondary btn-sm'>
                                        <i className="fas fa-arrow-circle-right"></i> Details 
                                 </Link>
                             </td>

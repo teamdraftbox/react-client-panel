@@ -85,8 +85,6 @@ class AddClient extends Component {
                     </form>
                 </div>
             </div>
-
-
         )
     }
 }

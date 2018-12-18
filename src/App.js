@@ -9,6 +9,7 @@ import AddClient from './components/clients/addClient'
 import ShowClient from './components/clients/showClient'
 import UpdateClient from './components/clients/updateClient'
 import SidebarLeft from './components/layout/sideBarLeft'
+import showDeal from './components/deals/dealDashboard'
 import Login from './components/auth/login'
 import Deal from './components/deals/deals';
 import './App.css';
@@ -28,10 +29,11 @@ class App extends Component {
               <div className="container">
                 <Switch>
                   <Route exact path="/" component={UserIsAuthenticated(Dashboard)} />
-                  <Route exact path="/client/add" component={UserIsAuthenticated(AddClient)} />
-                  <Route exact path="/client/:id" component={UserIsAuthenticated(ShowClient)} />
-                  <Route exact path="/client/edit/:id" component={UserIsAuthenticated(UpdateClient)} />
+                  <Route exact path="/user/add" component={UserIsAuthenticated(AddClient)} />
+                  <Route exact path="/user/:id" component={UserIsAuthenticated(ShowClient)} />
+                  <Route exact path="/user/edit/:id" component={UserIsAuthenticated(UpdateClient)} />
                   <Route exact path="/deal" component={UserIsAuthenticated(Deal)} />
+                  <Route exact path="/deal/:id" component={UserIsAuthenticated(showDeal)} />
                   <Route exact path="/login" component={UserIsNotAuthenticated(Login)} />
                 </Switch>
               </div>
