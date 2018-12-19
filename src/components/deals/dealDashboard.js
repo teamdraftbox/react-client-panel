@@ -1,7 +1,7 @@
 
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import React, { Component } from 'react'
-import { connect,Provider } from 'react-redux'
+import { connect, Provider } from 'react-redux'
 import { compose } from 'redux'
 import { UserIsAuthenticated } from '../../helper/auth'
 import { firestoreConnect } from 'react-redux-firebase'
