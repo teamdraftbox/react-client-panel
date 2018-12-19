@@ -28,8 +28,8 @@ class Login extends Component {
         const { message, messageType } = this.props.notify
         return (
             <div>
-                <div className='row'>
-                    <div className='col-md-6 mx-auto'>
+                <div className='row mt-4'>
+                    <div className='col-md-6 col-lg-6 mx-auto'>
                         <div className='card'>
                             <div className='card-body'>
                                 {message ? (
@@ -61,9 +61,7 @@ class Login extends Component {
                                     <input type="submit" value="Login" className='btn btn-primary btn-block mt-4' />
                                 </form>
                             </div>
-
                         </div>
-
                     </div>
                 </div>
             </div>

@@ -119,6 +119,55 @@ class showClient extends Component {
                         </div>
 
                     </div>
+                    {user.facebook_profile ? (
+                        <div>
+                            <div className='card'>
+                                <h2 className='card-header'>
+                                    Facebook Profile:{' '}{user.facebook_profile.name}
+                                </h2>
+                                <div className='card-body'>
+                                    <ul className="list-group list-group-flush">
+                                        <div className='row'>
+                                                <div className='col-md-9'>
+                                                    <strong>Email</strong>:
+                                                {user.facebook_profile.email}
+                                                </div>
+                                                <div className='col-md-3'>
+                                                    <img src={user.facebook_profile.picture.data.url} alt="Card  cap" />
+                                                </div>
+                                            </div>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    ) : null}
+                    {user.google_profile ? (
+                        <div>
+                            <div className='card'>
+                                <h2 className='card-header'>
+                                    Google Profile:{' '}{user.google_profile.name}
+                                </h2>
+                                <div className='card-body'>
+                                    <ul className="list-group list-group-flush">
+                                        <li className="list-group-item">
+                                            <div className='row'>
+                                                <div className='col-md-9'>
+                                                    <strong>Email</strong>:
+                                                {user.google_profile.email}
+                                                </div>
+                                                <div className='col-md-3'>
+                                                    <img src={user.google_profile.photo} alt="Card  cap" />
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    ) : null}
+
                 </div>
             )
         } else {

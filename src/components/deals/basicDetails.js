@@ -71,46 +71,6 @@ class ShowDeal extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className='row'>
-                        <div className='col-md-6'>
-                            <div className='card mt-4'>
-                                <h2 className="card-header">
-                                    <span className='text-primary'>
-                                        <i className="fas fa-home"></i>
-                                    </span>
-                                    {' '}Pickup Address:
-                                </h2>
-                                <div className='card-body'>
-                                    <ul className="list-group list-group-flush">
-                                        <li className="list-group-item">
-                                            <strong> Address </strong>
-                                            :
-                                  {deal.pickup_address}
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div className='col-md-6'>
-                            <div className='card mt-4'>
-                                <h2 className="card-header">
-                                    <span className='text-primary'>
-                                        <i className="fas fa-home"></i>
-                                    </span>
-                                    {' '}Drop Address:
-                               </h2>
-                                <div className='card-body'>
-                                    <ul className="list-group list-group-flush">
-                                        <li className="list-group-item">
-                                            <strong> Address </strong>
-                                            :
-                                  {deal.drop_address}
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             )
         } else {
