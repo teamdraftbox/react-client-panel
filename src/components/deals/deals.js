@@ -35,7 +35,7 @@ import Spinner from '../layout/Spinner'
                              <td>{(deal.pickup_address)}</td>
                              <td>{(deal.drop_address)}</td>
                              <td>
-                                 <Link to={`/deal/${deal.id}`} className='btn btn-secondary btn-sm'>
+                                 <Link to={`/deal/${deal.id}/detail`} className='btn btn-secondary btn-sm'>
                                         <i className="fas fa-arrow-circle-right"></i> Details 
                                  </Link>
                              </td>

@@ -34,6 +34,9 @@ class App extends Component {
                   <Route exact path="/user/edit/:id" component={UserIsAuthenticated(UpdateClient)} />
                   <Route exact path="/deal" component={UserIsAuthenticated(Deal)} />
                   <Route exact path="/deal/:id" component={UserIsAuthenticated(showDeal)} />
+                  <Route exact path="/deal/:id/detail" component={UserIsAuthenticated(showDeal)} />
+                  <Route exact path="/deal/:id/item" component={UserIsAuthenticated(showDeal)} />
+                  <Route exact path="/deal/:id/status" component={UserIsAuthenticated(showDeal)} />
                   <Route exact path="/login" component={UserIsNotAuthenticated(Login)} />
                 </Switch>
               </div>

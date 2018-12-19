@@ -1,44 +1,66 @@
 
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import { connect,Provider } from 'react-redux'
 import { compose } from 'redux'
+import { UserIsAuthenticated } from '../../helper/auth'
 import { firestoreConnect } from 'react-redux-firebase'
 import Spinner from '../layout/Spinner'
-import BasicDetails from './showDeal'
-
+import BasicDetails from './basicDetails'
+import Items from './items'
+import Status from './status'
+import store from '../../store'
 class dealDashboard extends Component {
+    state = {
+        canShow: false
+    }
+    static getDerivedStateFromProps(props, state) {
+        const { pathname } = props.location
+        const sub = pathname.slice(1, 5)
+        if (sub === 'deal') {
+            return {
+                canShow: true
+            }
+        } else {
+            return {
+                canShow: false
+            }
+        }
+    }
     render() {
-       const {pathname} =  this.props.location
         const { deal } = this.props
-        if (deal && pathname === `/deal/${deal.id}`) {
+        const { canShow } = this.state
+        if (deal && canShow) {
             return (
-                <div>
-                    <Router>
-                        <div>
+                <Provider store={store}>
+                    <div>
+                        <Router>
                             <div>
-                                <ul className="nav nav-pills">
-                                    <li className="nav-item">
-                                        <Link className="nav-link" to={`/deal/${deal.id}/detail`}>Basic Details</Link>
-                                    </li>
-                                    <li className="nav-item">
-                                        <Link className="nav-link" to={`/deal/${deal.id}/item`}>Items</Link>
-                                    </li>
-                                    <li className="nav-item">
-                                        <Link className="nav-link" to={`/deal/${deal.id}/status`}>Status</Link>
-                                    </li>
-                                </ul>
+                                <div>
+                                    <ul className="nav nav-pills">
+                                        <li className="nav-item">
+                                            <Link className="nav-link" to={`/deal/${deal.id}/detail`}>Basic Details</Link>
+                                        </li>
+                                        <li className="nav-item">
+                                            <Link className="nav-link" to={`/deal/${deal.id}/item`}>Items</Link>
+                                        </li>
+                                        <li className="nav-item">
+                                            <Link className="nav-link" to={`/deal/${deal.id}/status`}>Status</Link>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <Switch>
+                                        <Route exact path="/deal/:id/detail" component={UserIsAuthenticated(BasicDetails)} />
+                                        <Route exact path="/deal/:id/item" component={UserIsAuthenticated(Items)} />
+                                        <Route exact path="/deal/:id/status" component={UserIsAuthenticated(Status)} />
+                                    </Switch>
+                                </div>
                             </div>
-                            <div>
-                                <Switch>
-                                    <Route exact path="/deal/:id/detail" component={BasicDetails} />
-                                    <Route exact path="/deal/:id/item" component={BasicDetails} />
-                                    <Route exact path="/deal/:id/status" component={BasicDetails} />
-                                </Switch>
-                            </div>
-                        </div>
-                    </Router>
-                </div>
+                        </Router>
+                    </div>
+                </Provider>
+
             )
         } else {
             return <Spinner />
