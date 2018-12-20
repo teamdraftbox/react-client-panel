@@ -2,50 +2,61 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { firestoreConnect } from 'react-redux-firebase'
+import classnames from 'classnames'
 import Spinner from '../layout/Spinner'
+import ItemCard from './itemCard'
 
 class Items extends Component {
+    state = {
+        index:0,
+        canShow:true
+    }
+    handleClick = (e)=>{
+     this.setState({
+         index:e.currentTarget.dataset.id
+     })
+     this.openCity(e)
+    }
+    openCity(evt) {
+        // Declare all variables
+        let tablinks = document.getElementsByClassName("tablinks");
+        for (let i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        evt.currentTarget.className += " active";
+      }
     render() {
         const { deal } = this.props
-        console.log(deal)
+        let {index} = this.state
+        var i = 0
+        var canShow = false
         if (deal) {
             return (
                 <div>
                     <div className='row'>
-                        {deal.items.map((item) => (
-                            <div key={item.itemName} className='card mt-4 col-md-6'>
-                                <h1 className='card-header'>
-                                    <span className='text-primary'>
-                                        <i className="fas fa-cart-arrow-down"></i>
-                                    </span>{' '}
-                                    Items Details
-                                </h1>
-                                <img className="card-img-top" height="250" src={item.imageList[0].uri} alt="Card  cap"></img>
-                                <div className='card-body'>
-                                    <h3>Item Name : {item.itemName}</h3>
-                                    <ul className="list-group list-group-flush">
-                                        <li className="list-group-item">
-                                        <strong> Category </strong>
-                                            :
-                                        {item.category}
-                                        </li>
-                                        <li className="list-group-item">
-                                        <strong> Weight </strong>
-                                            :
-                                        {item.weight}{' '}{item.measurement}</li>
-                                        <li className="list-group-item">
-                                        <strong> Quantity </strong>
-                                            :
-                                        {item.quantity}</li>
-                                        <li className="list-group-item">
-                                        <strong>Value </strong>
-                                        :Rs{' '}
-                                        {item.value}/-</li>
-                                    </ul>
+                        <div className='col-md-3'>
+                            <div className="card">
+                                <div className="card-header">
+                                    Items List
                                 </div>
+                                <ul className="list-group list-group-flush">
+                                    {deal.items.map((item) =>{
+                                     i++
+                                     canShow = !canShow
+                                       return (<li key={item.itemName} onClick={this.handleClick.bind(this)} data-id={i} className={classnames("list-group-item tablinks",{
+                                           'active':canShow
+                                       })}>
+                                            Item{i}
+                                        </li>)
+                                    }
+                                    )}
+                                </ul>
                             </div>
-                        ))}
+                        </div>
 
+                        <div className='col-md-6'>
+                           <ItemCard index={index} params={this.props.match.params.id}/>
+                        </div>
                     </div>
                 </div>
 
